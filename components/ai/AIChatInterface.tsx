@@ -82,6 +82,33 @@ interface AIChatInterfaceProps {
   onClose?: () => void;
 }
 
+/**
+ * Generate a session token using the Web Crypto API.
+ *
+ * This value identifies a visitor's chat session and is what
+ * `conversations.listUser(sessionId)` reads their history by, so guessing one
+ * exposes somebody else's conversation. `Math.random()` is not seeded for
+ * unpredictability and must never back an identifier like this.
+ *
+ * Output shape is unchanged - the same lowercase base36 alphabet and the same
+ * length - so tokens already sitting in localStorage keep working and the
+ * backend sees the format it always has.
+ */
+function secureToken(length: number): string {
+  const alphabet = "0123456789abcdefghijklmnopqrstuvwxyz";
+  // Largest multiple of the alphabet that fits in a byte. Values at or above it
+  // are discarded so that every character stays equally likely; taking a plain
+  // modulo would quietly bias the first four letters.
+  const ceiling = Math.floor(256 / alphabet.length) * alphabet.length;
+  const byte = new Uint8Array(1);
+  let token = "";
+  while (token.length < length) {
+    crypto.getRandomValues(byte);
+    if (byte[0] < ceiling) token += alphabet[byte[0] % alphabet.length];
+  }
+  return token;
+}
+
 const WELCOME_IMAGE_URL = "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=200&fit=crop&q=80";
 const WELCOME_IMAGE_FALLBACK = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop&q=80";
 
@@ -103,7 +130,7 @@ export default function AIChatInterface({ onClose }: AIChatInterfaceProps) {
     // Initialize session ID
     let sid = localStorage.getItem('eti_session_id');
     if (!sid) {
-      sid = 'sess_' + Math.random().toString(36).substr(2, 16);
+      sid = 'sess_' + secureToken(16);
       localStorage.setItem('eti_session_id', sid);
     }
     setSessionId(sid);

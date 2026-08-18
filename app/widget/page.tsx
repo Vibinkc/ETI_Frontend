@@ -31,6 +31,23 @@ import {
   Heart
 } from "lucide-react";
 
+/**
+ * Drop-in replacement for Math.random(), backed by the Web Crypto API.
+ *
+ * The values here only position decorative particles and time animations, so
+ * predictability is harmless - but a scanner cannot tell a cosmetic use from a
+ * security-relevant one, and neither can the next person to copy this code.
+ * The return range is identical, [0, 1), so every expression that consumes it
+ * keeps the same distribution and the page looks exactly as before.
+ *
+ * Only called from inside an effect, so `crypto` is always the browser's.
+ */
+function secureRandom(): number {
+  const buffer = new Uint32Array(1);
+  crypto.getRandomValues(buffer);
+  return buffer[0] / 2 ** 32;
+}
+
 export default function WidgetPage() {
   const [isClient, setIsClient] = useState(false);
   const [lightningData, setLightningData] = useState<Array<{ duration: number, delay: number }>>([]);
@@ -48,18 +65,18 @@ export default function WidgetPage() {
 
     // Generate lightning bolt data
     const lightning = Array.from({ length: 6 }, (_, i) => ({
-      duration: 3 + Math.random() * 2,
+      duration: 3 + secureRandom() * 2,
       delay: i * 0.8,
     }));
     setLightningData(lightning);
 
     // Generate particle data
     const particles = Array.from({ length: 30 }, (_, i) => ({
-      left: Math.random() * 100,
-      top: Math.random() * 100,
+      left: secureRandom() * 100,
+      top: secureRandom() * 100,
       color: i % 3 === 0 ? '#002c5c' : i % 3 === 1 ? '#81c341' : '#002c5c',
-      duration: 10 + Math.random() * 20,
-      delay: Math.random() * 5,
+      duration: 10 + secureRandom() * 20,
+      delay: secureRandom() * 5,
     }));
     setParticleData(particles);
 
