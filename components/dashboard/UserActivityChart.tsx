@@ -86,6 +86,7 @@ export default function UserActivityChart() {
         <div className="flex gap-2 flex-wrap">
           {tabs.map((tab) => (
             <button
+              type="button"
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap ${

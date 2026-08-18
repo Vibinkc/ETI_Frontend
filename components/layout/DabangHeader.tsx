@@ -49,6 +49,7 @@ export default function ETIHeader() {
     <header className="sticky top-0 z-30 lg:static h-16 shrink-0 bg-white border-b border-[var(--eti-border)] flex items-center justify-between gap-4 px-6">
       <div className="flex items-center gap-3 min-w-0">
         <button
+          type="button"
           onClick={() => setOpen(true)}
           aria-label="Open navigation"
           className="lg:hidden shrink-0 -ml-1 p-2 rounded-lg text-[var(--eti-ink-muted)] hover:bg-[#f2f5f9] hover:text-[var(--eti-ink)] transition-colors"
@@ -75,6 +76,7 @@ export default function ETIHeader() {
             <span className="text-[11px] text-[var(--eti-ink-subtle)]">{adminUser?.email || "—"}</span>
           </div>
           <button
+            type="button"
             onClick={handleLogout}
             className="ml-1 p-2 rounded-[10px] text-[var(--eti-ink-subtle)] hover:text-[var(--eti-critical)] hover:bg-[#fef3f2] transition-colors"
             title="Log out"

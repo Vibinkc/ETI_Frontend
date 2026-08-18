@@ -289,14 +289,24 @@ export default function AIChatInterface({ onClose }: AIChatInterfaceProps) {
       preview = (div.textContent || div.innerText || "").substring(0, 60) + "...";
     }
 
+    const openConversation = () => {
+      setCurrentConversationId(conv.id);
+      setMessages(conv.messages);
+      setConversationStarted(!conv.ended);
+      setView("chat");
+    };
+
     return (
       <div
         key={conv.id}
-        onClick={() => {
-          setCurrentConversationId(conv.id);
-          setMessages(conv.messages);
-          setConversationStarted(!conv.ended);
-          setView("chat");
+        role="button"
+        tabIndex={0}
+        onClick={openConversation}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openConversation();
+          }
         }}
         className="bg-white p-3 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-50 hover:border-[#002c5c] transition-all"
       >
@@ -319,33 +329,44 @@ export default function AIChatInterface({ onClose }: AIChatInterfaceProps) {
     <div className="bg-gradient-to-r from-[#002c5c] to-[#81c341] text-white px-4 py-3 rounded-t-2xl flex justify-between items-center flex-shrink-0">
       <div className="flex items-center gap-2.5">
         {view === "chat" && (
-          <button onClick={() => setView("home")} className="p-1 hover:opacity-80 transition-opacity">
+          <button type="button" onClick={() => setView("home")} className="p-1 hover:opacity-80 transition-opacity">
             <ChevronLeft className="w-5 h-5" />
           </button>
         )}
         <div className="w-9 h-9 rounded-full bg-white/25 flex items-center justify-center overflow-hidden">
+          {/*
+            The load-failure fallback is wired to the element itself instead of
+            through an `onError` JSX prop: jsx-a11y counts onError/onLoad among
+            the interaction handlers a non-interactive element must not carry,
+            and silencing the logo for assistive tech (alt=""/role="presentation")
+            is not an acceptable trade here. The callback ref runs synchronously
+            during commit, before the browser can dispatch an error event, so the
+            behaviour is identical to the previous onError prop.
+          */}
           <img
             src="/eti_logo.png"
             alt="ETI"
             className="w-7 h-7 object-contain"
-            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+            ref={(el) => {
+              if (el) el.onerror = () => { el.style.display = 'none'; };
+            }}
           />
         </div>
         <div>
           <h3 className="text-sm font-semibold leading-tight">ETI Assistant</h3>
           <p className="text-[11px] opacity-95 flex items-center gap-1.5 mt-0.5">
-            <span className="w-1.5 h-1.5 bg-[#81c341] rounded-full inline-block shadow-[0_0_3px_rgba(129,195,65,0.6)]"></span>
-            We are online!
+            <span className="w-1.5 h-1.5 bg-[#81c341] rounded-full inline-block shadow-[0_0_3px_rgba(129,195,65,0.6)]"></span>We are online!
           </p>
         </div>
       </div>
       <div className="flex items-center gap-2">
         {view === "chat" && conversationStarted && !showThankYou && (
-          <button onClick={endChat} className="text-white hover:bg-white/20 p-1.5 rounded-full transition-colors" title="End Chat">
+          <button type="button" onClick={endChat} className="text-white hover:bg-white/20 p-1.5 rounded-full transition-colors" title="End Chat">
             <XCircle className="w-4 h-4" />
           </button>
         )}
         <button
+          type="button"
           onClick={() => {
             if (onClose) onClose();
           }}
@@ -373,6 +394,7 @@ export default function AIChatInterface({ onClose }: AIChatInterfaceProps) {
             We appreciate your time. If you have any more questions, feel free to start a new conversation.
           </p>
           <button
+            type="button"
             onClick={startNewConversation}
             className="bg-gradient-to-r from-[#002c5c] to-[#81c341] text-white border-none py-3 px-6 rounded-xl text-sm font-semibold hover:shadow-lg hover:scale-105 transition-all w-full max-w-[280px]"
           >
@@ -412,6 +434,7 @@ export default function AIChatInterface({ onClose }: AIChatInterfaceProps) {
             </div>
 
             <button
+              type="button"
               onClick={handleChatWithUs}
               className="mt-auto w-full py-3 bg-gradient-to-r from-[#002c5c] to-[#81c341] text-white rounded-xl font-semibold text-sm shadow-md hover:shadow-lg hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
             >
@@ -492,6 +515,7 @@ export default function AIChatInterface({ onClose }: AIChatInterfaceProps) {
                     disabled={loading}
                   />
                   <button
+                    type="button"
                     onClick={sendMessage}
                     disabled={loading || !query.trim()}
                     className="w-9 h-9 rounded-full bg-gradient-to-r from-[#002c5c] to-[#81c341] flex items-center justify-center text-white shadow-sm hover:shadow-md hover:scale-105 transition-all disabled:opacity-50 disabled:hover:scale-100"
@@ -515,6 +539,7 @@ export default function AIChatInterface({ onClose }: AIChatInterfaceProps) {
       {!showThankYou && view !== 'chat' && (
         <div className="bg-white border-t border-gray-200 flex">
           <button
+            type="button"
             onClick={() => setView("home")}
             className={`flex-1 py-2.5 flex flex-col items-center justify-center gap-1 transition-colors ${view === 'home' ? 'text-[#81c341]' : 'text-gray-400 hover:text-gray-600'}`}
           >
@@ -523,6 +548,7 @@ export default function AIChatInterface({ onClose }: AIChatInterfaceProps) {
             {view === 'home' && <div className="w-full h-0.5 bg-[#81c341] absolute bottom-0 max-w-[50%] rounded-t-full"></div>}
           </button>
           <button
+            type="button"
             onClick={() => setView("conversations")}
             className={`flex-1 py-2.5 flex flex-col items-center justify-center gap-1 transition-colors ${view === 'conversations' ? 'text-[#81c341]' : 'text-gray-400 hover:text-gray-600'}`}
           >

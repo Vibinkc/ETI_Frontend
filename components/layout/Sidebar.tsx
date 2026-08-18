@@ -60,8 +60,8 @@ export default function Sidebar() {
         {/* Favorites & Recently */}
         <div className="px-6 mb-6">
           <div className="flex gap-4 text-sm">
-            <button className="text-gray-500 hover:text-gray-900 transition-colors">Favorites</button>
-            <button className="text-gray-500 hover:text-gray-900 transition-colors">Recently</button>
+            <button type="button" className="text-gray-500 hover:text-gray-900 transition-colors">Favorites</button>
+            <button type="button" className="text-gray-500 hover:text-gray-900 transition-colors">Recently</button>
           </div>
         </div>
 
@@ -79,6 +79,7 @@ export default function Sidebar() {
                 const isActive = item.name === activeItem;
                 return (
                   <button
+                    type="button"
                     key={item.name}
                     onClick={() => setActiveItem(item.name)}
                     className={`w-full flex items-center gap-3 px-4 py-2 text-sm transition-colors ${

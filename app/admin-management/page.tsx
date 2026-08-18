@@ -284,6 +284,7 @@ export default function AdminManagementPage() {
             {/* Create Admin Button */}
             <div className="mb-4">
               <button
+                type="button"
                 onClick={() => setShowForm(!showForm)}
                 className="flex items-center gap-2 px-4 py-2.5 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors font-medium cursor-pointer"
               >
@@ -299,10 +300,11 @@ export default function AdminManagementPage() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor="admin-first-name" className="block text-sm font-medium text-gray-700 mb-2">
                         First Name
                       </label>
                       <input
+                        id="admin-first-name"
                         type="text"
                         value={formData.first_name}
                         onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
@@ -311,10 +313,11 @@ export default function AdminManagementPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor="admin-last-name" className="block text-sm font-medium text-gray-700 mb-2">
                         Last Name
                       </label>
                       <input
+                        id="admin-last-name"
                         type="text"
                         value={formData.last_name}
                         onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
@@ -324,10 +327,11 @@ export default function AdminManagementPage() {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="admin-email" className="block text-sm font-medium text-gray-700 mb-2">
                       Email
                     </label>
                     <input
+                      id="admin-email"
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -336,10 +340,11 @@ export default function AdminManagementPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="admin-password" className="block text-sm font-medium text-gray-700 mb-2">
                       Password
                     </label>
                     <input
+                      id="admin-password"
                       type="password"
                       value={formData.password}
                       onChange={(e) => setFormData({ ...formData, password: e.target.value })}
@@ -417,6 +422,7 @@ export default function AdminManagementPage() {
                           </td>
                           <td className="px-4 py-2.5 whitespace-nowrap text-right text-sm font-medium">
                             <button
+                              type="button"
                               onClick={() => {
                                 setSelectedAdminId(admin.id);
                                 setShowResetPassword(true);
@@ -428,6 +434,7 @@ export default function AdminManagementPage() {
                             </button>
                             {!admin.is_superuser && (
                               <button
+                                type="button"
                                 onClick={() => handleDelete(admin.id)}
                                 className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[var(--eti-critical)] hover:text-red-800 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
                               >
@@ -451,8 +458,9 @@ export default function AdminManagementPage() {
                   <h2 className="text-xl font-semibold mb-4 text-[var(--eti-ink)]">Reset Password</h2>
                   <form onSubmit={handleResetPassword}>
                     <div className="mb-4">
-                      <label className="block text-sm font-medium text-gray-700 mb-2">New Password</label>
+                      <label htmlFor="reset-new-password" className="block text-sm font-medium text-gray-700 mb-2">New Password</label>
                       <input
+                        id="reset-new-password"
                         type="password"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}

@@ -242,9 +242,12 @@ export default function DocumentsPage() {
         for (; i < lines.length; i++) {
           const line = lines[i].trim();
           if (line === "" || line.startsWith("=")) continue;
-          const m = line.match(/^(URL|Page|Title|Description):\s*(.*)$/);
+          // `\s*` and `.*` could both match a space, so a non-matching line gave
+          // the engine exponentially many ways to split a run of spaces. Capture
+          // everything after the colon instead and trim it in JS - same groups.
+          const m = line.match(/^(URL|Page|Title|Description):(.*)$/);
           if (!m) break;
-          meta[m[1]] = m[2];
+          meta[m[1]] = m[2].replace(/^\s+/, "");
         }
         const body = lines
           .slice(i)
@@ -307,6 +310,7 @@ export default function DocumentsPage() {
                   <span className="text-sm text-red-800">{error}</span>
                 </div>
                 <button
+                  type="button"
                   onClick={() => setError(null)}
                   className="text-[var(--eti-critical)] hover:text-red-800 cursor-pointer"
                 >
@@ -343,12 +347,14 @@ export default function DocumentsPage() {
                     </span>
                     <div className="flex items-center gap-2">
                       <button
+                        type="button"
                         onClick={() => setSelected(new Set())}
                         className="text-[12px] font-medium text-[var(--eti-ink-muted)] hover:text-[var(--eti-ink)] transition-colors"
                       >
                         Clear
                       </button>
                       <button
+                        type="button"
                         onClick={handleBulkDelete}
                         disabled={bulkDeleting}
                         className="eti-btn eti-btn-danger h-7 px-2.5"
@@ -457,6 +463,7 @@ export default function DocumentsPage() {
                           </td>
                           <td className="px-4 py-2.5 whitespace-nowrap text-right">
                             <button
+                              type="button"
                               onClick={() => handleView(doc)}
                               disabled={viewingId === doc.id}
                               title={isWebPage(doc) ? "Open the source page" : "View this document"}
@@ -467,11 +474,6 @@ export default function DocumentsPage() {
                                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[var(--color-primary)]"></div>
                                   Opening…
                                 </>
-                              ) : isWebPage(doc) ? (
-                                <>
-                                  <Eye className="w-4 h-4" />
-                                  View
-                                </>
                               ) : (
                                 <>
                                   <Eye className="w-4 h-4" />
@@ -480,6 +482,7 @@ export default function DocumentsPage() {
                               )}
                             </button>
                             <button
+                              type="button"
                               onClick={() => handleDelete(doc.id, doc.name)}
                               disabled={deletingId === doc.id}
                               className="inline-flex items-center gap-2 px-3 py-1.5 text-sm text-[var(--eti-critical)] hover:text-red-800 hover:bg-red-50 rounded-lg transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
@@ -516,6 +519,7 @@ export default function DocumentsPage() {
 
                     <nav aria-label="Pagination" className="flex items-center gap-1 ml-auto">
                       <button
+                        type="button"
                         onClick={() => setPage((p) => Math.max(0, p - 1))}
                         disabled={page === 0 || loading}
                         className="inline-flex items-center gap-1 h-8 px-2.5 rounded-lg text-[13px] font-medium text-[var(--eti-ink-muted)] hover:bg-white hover:text-[var(--eti-ink)] disabled:opacity-40 disabled:hover:bg-transparent transition-colors"
@@ -534,6 +538,7 @@ export default function DocumentsPage() {
                           </span>
                         ) : (
                           <button
+                            type="button"
                             key={item}
                             onClick={() => setPage(item - 1)}
                             disabled={loading}
@@ -550,6 +555,7 @@ export default function DocumentsPage() {
                       )}
 
                       <button
+                        type="button"
                         onClick={() => setPage((p) => p + 1)}
                         disabled={(page + 1) * PAGE_SIZE >= total || loading}
                         className="inline-flex items-center gap-1 h-8 px-2.5 rounded-lg text-[13px] font-medium text-[var(--eti-ink-muted)] hover:bg-white hover:text-[var(--eti-ink)] disabled:opacity-40 disabled:hover:bg-transparent transition-colors"
@@ -569,14 +575,18 @@ export default function DocumentsPage() {
       {contentDoc && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(15,28,46,0.45)] p-4"
-          onClick={() => setContentDoc(null)}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Scraped content"
+          // Close only on the backdrop itself. Same result as stopPropagation on
+          // the panel below, without a click handler on a non-interactive node.
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setContentDoc(null);
+          }}
+          role="presentation"
         >
           <div
             className="eti-card w-full max-w-4xl max-h-[90vh] sm:max-h-[85vh] flex flex-col shadow-[var(--eti-shadow-lg)]"
-            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Scraped content"
           >
             <div className="flex items-start justify-between gap-3 px-5 py-3 border-b border-[var(--eti-border)]">
               <div className="min-w-0">
@@ -595,6 +605,7 @@ export default function DocumentsPage() {
                 </p>
               </div>
               <button
+                type="button"
                 onClick={() => setContentDoc(null)}
                 aria-label="Close"
                 className="shrink-0 p-1.5 rounded-lg text-[var(--eti-ink-subtle)] hover:bg-[#f2f5f9] hover:text-[var(--eti-ink)] transition-colors"

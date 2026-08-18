@@ -174,7 +174,7 @@ export default function ActivityLogPage() {
                 <p className="text-sm text-[var(--eti-ink-muted)] mb-4">
                   The activity log records what every admin does, so only the super admin can read it.
                 </p>
-                <button onClick={() => router.push("/")} className="eti-btn eti-btn-primary">
+                <button type="button" onClick={() => router.push("/")} className="eti-btn eti-btn-primary">
                   Back to dashboard
                 </button>
               </div>
@@ -189,6 +189,7 @@ export default function ActivityLogPage() {
                     </span>
                     {(actionFilter || actorFilter || (from && to)) && (
                       <button
+                        type="button"
                         onClick={() => {
                           setActionFilter("");
                           setActorFilter("");
@@ -310,7 +311,7 @@ export default function ActivityLogPage() {
                     </thead>
                     <tbody className="divide-y divide-[var(--eti-border)]">
                       {loading ? (
-                        [...Array(6)].map((_, i) => (
+                        Array.from({ length: 6 }).map((_, i) => (
                           <tr key={i}>
                             <td colSpan={4} className="px-4 py-3">
                               <div className="h-4 bg-gray-100 rounded animate-pulse" />
@@ -361,6 +362,7 @@ export default function ActivityLogPage() {
                     </span>
                     <nav aria-label="Activity log pagination" className="flex items-center gap-1">
                       <button
+                        type="button"
                         onClick={() => setPage((p) => Math.max(0, p - 1))}
                         disabled={page === 0 || loading}
                         className="inline-flex items-center gap-1 h-8 px-2.5 rounded-lg text-[13px] font-medium text-[var(--eti-ink-muted)] hover:bg-white hover:text-[var(--eti-ink)] disabled:opacity-40 disabled:hover:bg-transparent transition-colors"
@@ -380,6 +382,7 @@ export default function ActivityLogPage() {
                         ) : (
                           <button
                             key={item}
+                            type="button"
                             onClick={() => setPage(item - 1)}
                             disabled={loading}
                             aria-current={page + 1 === item ? "page" : undefined}
@@ -395,6 +398,7 @@ export default function ActivityLogPage() {
                       )}
 
                       <button
+                        type="button"
                         onClick={() => setPage((p) => p + 1)}
                         disabled={(page + 1) * PAGE_SIZE >= total || loading}
                         className="inline-flex items-center gap-1 h-8 px-2.5 rounded-lg text-[13px] font-medium text-[var(--eti-ink-muted)] hover:bg-white hover:text-[var(--eti-ink)] disabled:opacity-40 disabled:hover:bg-transparent transition-colors"

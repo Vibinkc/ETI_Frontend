@@ -297,7 +297,7 @@ export default function WidgetPage() {
                   placeholder="Enter your email"
                   className="flex-1 px-6 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#002c5c] text-lg transition-all"
                 />
-                <button className="px-8 py-4 bg-gradient-to-r from-[#002c5c] to-[#81c341] text-white rounded-lg font-semibold hover:shadow-xl transition-all flex items-center gap-2 transform hover:scale-105 animate-pulse-slow">
+                <button type="button" className="px-8 py-4 bg-gradient-to-r from-[#002c5c] to-[#81c341] text-white rounded-lg font-semibold hover:shadow-xl transition-all flex items-center gap-2 transform hover:scale-105 animate-pulse-slow">
                   Start Learning Free
                   <ArrowRight className="w-5 h-5" />
                 </button>
@@ -564,7 +564,7 @@ export default function WidgetPage() {
               <p className={`text-xl text-gray-700 mb-6 transition-all duration-1000 delay-200 ${isAboutUsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                 At <span className="font-semibold text-[#002c5c]">Electrical Training Institute</span>, we believe in the power of education to transform lives. Whether you&apos;re just starting out or looking to enhance your current skills, we&apos;re here to support your journey every step of the way.
               </p>
-              <button className={`px-8 py-4 bg-gradient-to-r from-[#002c5c] to-[#81c341] text-white rounded-lg font-semibold text-lg hover:shadow-xl transition-all transform hover:scale-105 relative overflow-hidden group ${isAboutUsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} transition-all duration-1000 delay-400`}>
+              <button type="button" className={`px-8 py-4 bg-gradient-to-r from-[#002c5c] to-[#81c341] text-white rounded-lg font-semibold text-lg hover:shadow-xl transition-all transform hover:scale-105 relative overflow-hidden group ${isAboutUsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} transition-all duration-1000 delay-400`}>
                 <span className="relative z-10 flex items-center gap-2">
                   Join us and take the first step toward a rewarding and impactful career
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -1114,10 +1114,10 @@ export default function WidgetPage() {
                 Please visit our career opportunities page to learn more about the different programs we offer and go to <strong>Helmets To Hardhats</strong> to register.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <button className="px-8 py-4 bg-gradient-to-r from-[#002c5c] to-[#81c341] text-white rounded-lg font-semibold text-lg hover:shadow-xl transition-all transform hover:scale-105">
+                <button type="button" className="px-8 py-4 bg-gradient-to-r from-[#002c5c] to-[#81c341] text-white rounded-lg font-semibold text-lg hover:shadow-xl transition-all transform hover:scale-105">
                   View Career Opportunities
                 </button>
-                <button className="px-8 py-4 bg-white border-2 border-[#002c5c] text-[#002c5c] rounded-lg font-semibold text-lg hover:bg-[#002c5c] hover:text-white transition-all transform hover:scale-105">
+                <button type="button" className="px-8 py-4 bg-white border-2 border-[#002c5c] text-[#002c5c] rounded-lg font-semibold text-lg hover:bg-[#002c5c] hover:text-white transition-all transform hover:scale-105">
                   Visit Helmets To Hardhats
                 </button>
               </div>
@@ -1132,7 +1132,7 @@ export default function WidgetPage() {
           <h2 className={`text-5xl font-bold text-white mb-6 transition-all duration-1000 delay-200 ${isCTAVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             Your AI-powered learning companion
           </h2>
-          <button className={`px-8 py-4 bg-white text-[#002c5c] rounded-lg font-semibold text-lg hover:shadow-2xl transition-all transform hover:scale-105 ${isCTAVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} transition-all duration-1000 delay-400`}>
+          <button type="button" className={`px-8 py-4 bg-white text-[#002c5c] rounded-lg font-semibold text-lg hover:shadow-2xl transition-all transform hover:scale-105 ${isCTAVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} transition-all duration-1000 delay-400`}>
             APPLY NOW
           </button>
         </div>

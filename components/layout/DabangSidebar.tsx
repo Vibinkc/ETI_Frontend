@@ -87,6 +87,7 @@ export default function ETISidebar() {
             Electrical Training Institute
           </span>
           <button
+            type="button"
             onClick={() => setOpen(false)}
             aria-label="Close navigation"
             className="lg:hidden ml-auto shrink-0 p-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors"

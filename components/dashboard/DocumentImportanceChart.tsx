@@ -154,6 +154,7 @@ export default function DocumentImportanceChart({ range }: { range?: DashboardRa
         </div>
         {hiddenCount > 0 && (
           <button
+            type="button"
             onClick={() => setShowAll(true)}
             className="text-[var(--color-primary)] font-medium hover:underline whitespace-nowrap"
           >
@@ -164,16 +165,23 @@ export default function DocumentImportanceChart({ range }: { range?: DashboardRa
 
       {/* Detail view - every document, with the numbers behind the bars */}
       {showAll && (
+        // Clicking the backdrop closes the dialog. The guard fires only when the click
+        // landed on the backdrop itself, which is exactly what the panel's
+        // stopPropagation handler used to achieve. Keyboard users are covered by the
+        // Escape handler in the effect above and by the focusable Close button; a modal
+        // backdrop must not be made focusable, so it stays presentational.
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(15,28,46,0.45)] p-4"
-          onClick={() => setShowAll(false)}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Most queried documents, full view"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setShowAll(false);
+          }}
+          role="presentation"
         >
           <div
             className="eti-card w-full max-w-3xl max-h-[90vh] sm:max-h-[85vh] flex flex-col shadow-[var(--eti-shadow-lg)]"
-            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Most queried documents, full view"
           >
             <div className="flex items-start justify-between gap-3 px-5 py-3 border-b border-[var(--eti-border)]">
               <div>
@@ -184,6 +192,7 @@ export default function DocumentImportanceChart({ range }: { range?: DashboardRa
                 </p>
               </div>
               <button
+                type="button"
                 onClick={() => setShowAll(false)}
                 aria-label="Close"
                 className="shrink-0 p-1.5 rounded-lg text-[var(--eti-ink-subtle)] hover:bg-[#f2f5f9] hover:text-[var(--eti-ink)] transition-colors"

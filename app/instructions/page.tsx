@@ -155,7 +155,7 @@ export default function InstructionsPage() {
                   ) : meta?.is_default ? (
                     <span className="inline-flex items-center gap-1.5">
                       <span className="w-2 h-2 rounded-full bg-[var(--eti-warning)]" />
-                      Using built-in default — not yet customised
+                      {"Using built-in default — not yet customised"}
                     </span>
                   ) : (
                     <span className="inline-flex items-center gap-1.5">
@@ -184,6 +184,7 @@ export default function InstructionsPage() {
 
               <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-3 border-t border-[var(--eti-border)] bg-gray-50">
                 <button
+                  type="button"
                   onClick={handleResetToDefault}
                   disabled={loading || saving}
                   className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-[var(--eti-border-strong)] rounded-[10px] hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
@@ -195,6 +196,7 @@ export default function InstructionsPage() {
                 <div className="flex items-center gap-3">
                   {hasChanges && !saving && <span className="text-xs text-[var(--eti-warning)]">Unsaved changes</span>}
                   <button
+                    type="button"
                     onClick={handleSave}
                     disabled={loading || saving || !hasChanges}
                     className="eti-btn eti-btn-primary"

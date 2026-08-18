@@ -66,6 +66,7 @@ ${script}
                   </p>
                 </div>
                 <button
+                  type="button"
                   onClick={copyToClipboard}
                   className="eti-btn eti-btn-primary"
                 >
@@ -98,6 +99,7 @@ ${script}
                       <code>{`<script src="${API_ENDPOINTS.base}/api/bot/widget.js"></script>`}</code>
                     </pre>
                     <button
+                      type="button"
                       onClick={() => {
                         navigator.clipboard.writeText(`<script src="${API_ENDPOINTS.base}/api/bot/widget.js"></script>`);
                         setCopied(true);

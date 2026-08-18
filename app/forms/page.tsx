@@ -94,6 +94,7 @@ export default function FormsPage() {
                   <span className="text-sm text-red-800">{error}</span>
                 </div>
                 <button
+                  type="button"
                   onClick={() => setError(null)}
                   className="text-[var(--eti-critical)] hover:text-red-800 cursor-pointer"
                 >
@@ -168,6 +169,7 @@ export default function FormsPage() {
                           </td>
                           <td className="px-4 py-2.5 whitespace-nowrap text-right text-sm font-medium">
                             <button
+                              type="button"
                               onClick={() => handleDelete(submission.id)}
                               className="text-[var(--eti-critical)] hover:text-red-900 flex items-center gap-1 ml-auto cursor-pointer"
                             >

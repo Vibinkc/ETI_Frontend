@@ -276,7 +276,19 @@ export default function MessagesPage() {
                   .map((conv) => (
                   <div
                     key={conv.id}
+                    role="button"
+                    tabIndex={0}
                     onClick={() => setSelectedConversation(conv)}
+                    onKeyDown={(e) => {
+                      // Keyboard equivalent of the row click. Guarded on the row
+                      // itself so Enter/Space on the nested delete button keeps
+                      // behaving exactly as it does today.
+                      if (e.target !== e.currentTarget) return;
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setSelectedConversation(conv);
+                      }
+                    }}
                     className={`group relative flex items-center gap-2.5 px-3 py-2 border-b border-[var(--eti-border)] cursor-pointer transition-colors ${
                       selectedConversation?.id === conv.id
                         ? "bg-[#eef3f9]"
@@ -309,6 +321,7 @@ export default function MessagesPage() {
                     </div>
 
                     <button
+                      type="button"
                       onClick={(e) => {
                         e.stopPropagation();
                         if (confirm("Are you sure you want to delete this conversation?")) {
@@ -334,6 +347,7 @@ export default function MessagesPage() {
               <>
                 <div className="px-4 py-2.5 border-b border-[var(--eti-border)] bg-white">
                   <button
+                    type="button"
                     onClick={() => setSelectedConversation(null)}
                     className="lg:hidden mb-2 inline-flex items-center gap-1.5 text-[12px] font-medium text-[var(--color-primary)]"
                   >

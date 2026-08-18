@@ -124,6 +124,7 @@ export default function TopProductsTable({ range }: { range?: DashboardRange } =
 
           <nav aria-label="Top documents pagination" className="flex items-center gap-1">
             <button
+              type="button"
               onClick={() => setPage((p) => Math.max(0, p - 1))}
               disabled={page === 0}
               aria-label="Previous page"
@@ -134,6 +135,7 @@ export default function TopProductsTable({ range }: { range?: DashboardRange } =
 
             {Array.from({ length: totalPages }, (_, i) => (
               <button
+                type="button"
                 key={i}
                 onClick={() => setPage(i)}
                 aria-current={page === i ? "page" : undefined}
@@ -148,6 +150,7 @@ export default function TopProductsTable({ range }: { range?: DashboardRange } =
             ))}
 
             <button
+              type="button"
               onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
               disabled={page >= totalPages - 1}
               aria-label="Next page"

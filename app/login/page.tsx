@@ -70,6 +70,7 @@ export default function LoginPage() {
           muted
           playsInline
           preload="metadata"
+          tabIndex={-1}
           aria-hidden="true"
         />
         {/* Navy wash: the copy sits on top of moving footage, so it needs a
@@ -106,16 +107,13 @@ export default function LoginPage() {
           <div className="mt-9 h-px w-16 bg-[var(--color-secondary)]" />
           <ul className="mt-6 space-y-3 text-[15.5px] text-white/85">
             <li className="flex items-center gap-2.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-secondary)]" />
-              Upload documents and scrape pages
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-secondary)]" />Upload documents and scrape pages
             </li>
             <li className="flex items-center gap-2.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-secondary)]" />
-              Edit the assistant&apos;s instructions
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-secondary)]" />Edit the assistant&apos;s instructions
             </li>
             <li className="flex items-center gap-2.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-secondary)]" />
-              Review every conversation
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-secondary)]" />Review every conversation
             </li>
           </ul>
         </div>

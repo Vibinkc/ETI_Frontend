@@ -67,6 +67,7 @@ export default function DashboardFilter({
           const active = !customActive && value.period === p.value;
           return (
             <button
+              type="button"
               key={p.value}
               onClick={() => onChange({ period: p.value })}
               aria-pressed={active}
@@ -105,6 +106,7 @@ export default function DashboardFilter({
             className="h-6 text-[12px] text-[var(--eti-ink)] bg-transparent outline-none"
           />
           <button
+            type="button"
             onClick={clearCustom}
             title="Clear date range"
             className="p-0.5 rounded text-[var(--eti-ink-subtle)] hover:text-[var(--eti-critical)] transition-colors"
@@ -114,6 +116,7 @@ export default function DashboardFilter({
         </div>
       ) : (
         <button
+          type="button"
           onClick={() => setShowCustom(true)}
           className="inline-flex items-center gap-1.5 h-8 px-2.5 rounded-lg border border-[var(--eti-border)] bg-white text-[12px] font-medium text-[var(--eti-ink-muted)] hover:bg-[#f7f9fb] transition-colors"
         >

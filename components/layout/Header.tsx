@@ -26,16 +26,16 @@ export default function Header() {
 
       {/* Icons */}
       <div className="flex items-center gap-2 flex-shrink-0">
-        <button className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
+        <button type="button" className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
           <Sun className="w-5 h-5" />
         </button>
-        <button className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
+        <button type="button" className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
           <History className="w-5 h-5" />
         </button>
         {/* <button className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
           <Bell className="w-5 h-5" />
         </button> */}
-        <button className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
+        <button type="button" className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
           <Square className="w-5 h-5" />
         </button>
       </div>
