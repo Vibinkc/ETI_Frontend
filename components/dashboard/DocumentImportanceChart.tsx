@@ -27,6 +27,9 @@ interface DocumentImportance {
   created_at: string | null;
 }
 
+/** What a recharts Tooltip formatter receives (mirrors recharts' own ValueType). */
+type TooltipValue = number | string | ReadonlyArray<number | string>;
+
 export default function DocumentImportanceChart({ range }: { range?: DashboardRange } = {}) {
   const [data, setData] = useState<DocumentImportance[]>([]);
   const [loading, setLoading] = useState(true);
@@ -120,7 +123,7 @@ export default function DocumentImportanceChart({ range }: { range?: DashboardRa
                 border: "1px solid #e5e7eb",
                 borderRadius: "8px"
               }}
-              formatter={(value: any) => [`${value}%`, "Queries answered"]}
+              formatter={(value: TooltipValue) => [`${value}%`, "Queries answered"]}
               labelFormatter={(label) => {
                 const doc = chartData.find(d => d.name === label);
                 return doc?.fullName || label;
@@ -220,7 +223,7 @@ export default function DocumentImportanceChart({ range }: { range?: DashboardRa
                         borderRadius: "10px",
                         fontSize: "12px",
                       }}
-                      formatter={(value: any) => [`${value}%`, "Queries answered"]}
+                      formatter={(value: TooltipValue) => [`${value}%`, "Queries answered"]}
                       labelFormatter={(label) =>
                         chartData.find((d) => d.name === label)?.fullName || label
                       }

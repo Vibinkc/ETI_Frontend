@@ -125,9 +125,9 @@ export default function DocumentUpload() {
           setMessage(paramsMsg);
         }
       }
-    } catch (err: any) {
+    } catch (err) {
       setUploadStatus("error");
-      setMessage(err.message || "Failed to upload document");
+      setMessage((err instanceof Error ? err.message : "") || "Failed to upload document");
     } finally {
       setUploading(false);
     }
@@ -168,9 +168,9 @@ export default function DocumentUpload() {
         setMessage(errorData.detail || "Failed to scrape website content");
         setUploadStatus("error");
       }
-    } catch (err: any) {
+    } catch (err) {
       setUploadStatus("error");
-      setMessage(err.message || "Failed to scrape website content");
+      setMessage((err instanceof Error ? err.message : "") || "Failed to scrape website content");
     } finally {
       setScraping(false);
     }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FileText, MessageSquare, Users } from "lucide-react";
+import { FileText, MessageSquare, Users, type LucideIcon } from "lucide-react";
 import { API_ENDPOINTS } from "@/lib/api";
 import { rangeQuery, type DashboardRange } from "./DashboardFilter";
 
@@ -9,7 +9,7 @@ interface StatTileProps {
   title: string;
   value: string;
   caption: string;
-  icon: any;
+  icon: LucideIcon;
   accent: string;
 }
 

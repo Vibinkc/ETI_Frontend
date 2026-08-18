@@ -24,7 +24,7 @@ export default function BotScriptPage() {
       }
       const data = await response.json();
       setScript(data.script);
-    } catch (err: any) {
+    } catch (err) {
       console.error("Error loading script:", err);
     } finally {
       setLoading(false);
@@ -126,7 +126,7 @@ ${script}
                       🧪 Test the Bot:
                     </h4>
                     <p className="text-sm text-green-800 mb-2">
-                      We've created a test page where you can try the bot widget:
+                      We&apos;ve created a test page where you can try the bot widget:
                     </p>
                     <a
                       href="/test-bot.html"

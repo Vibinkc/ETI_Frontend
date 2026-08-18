@@ -134,8 +134,8 @@ export default function MessagesPage() {
       }
       const data = await response.json();
       setConversations(data.conversations || []);
-    } catch (err: any) {
-      setError(err.message || "Failed to load conversations");
+    } catch (err) {
+      setError((err instanceof Error ? err.message : "") || "Failed to load conversations");
     } finally {
       setLoading(false);
     }
@@ -153,8 +153,8 @@ export default function MessagesPage() {
       if (selectedConversation?.id === id) {
         setSelectedConversation(null);
       }
-    } catch (err: any) {
-      alert(err.message || "Failed to delete conversation");
+    } catch (err) {
+      alert((err instanceof Error ? err.message : "") || "Failed to delete conversation");
     }
   };
 

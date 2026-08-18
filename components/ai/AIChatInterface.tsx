@@ -35,7 +35,7 @@ function formatMessage(text: string): string {
 
   // Handle newlines
   const lines = html.split('\n');
-  let formattedLines: string[] = [];
+  const formattedLines: string[] = [];
   let inList = false;
   let listType = '';
 

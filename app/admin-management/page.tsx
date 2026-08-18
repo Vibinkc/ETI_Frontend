@@ -130,8 +130,8 @@ export default function AdminManagementPage() {
 
       const data = await response.json();
       setAdmins(data);
-    } catch (err: any) {
-      setError(err.message || "Failed to load admins");
+    } catch (err) {
+      setError(err instanceof Error && err.message ? err.message : "Failed to load admins");
     } finally {
       setLoading(false);
     }
@@ -168,8 +168,8 @@ export default function AdminManagementPage() {
       setFormData({ email: "", password: "", first_name: "", last_name: "" });
       setShowForm(false);
       await loadAdmins();
-    } catch (err: any) {
-      setError(err.message || "An error occurred");
+    } catch (err) {
+      setError(err instanceof Error && err.message ? err.message : "An error occurred");
     } finally {
       setSubmitting(false);
     }
@@ -207,8 +207,8 @@ export default function AdminManagementPage() {
       setShowResetPassword(false);
       setNewPassword("");
       setSelectedAdminId(null);
-    } catch (err: any) {
-      setError(err.message || "Failed to reset password");
+    } catch (err) {
+      setError(err instanceof Error && err.message ? err.message : "Failed to reset password");
     } finally {
       setResetSubmitting(false);
     }
@@ -238,8 +238,8 @@ export default function AdminManagementPage() {
       }
 
       await loadAdmins();
-    } catch (err: any) {
-      setError(err.message || "Failed to delete admin");
+    } catch (err) {
+      setError(err instanceof Error && err.message ? err.message : "Failed to delete admin");
     }
   };
 

@@ -49,8 +49,8 @@ export default function LoginPage() {
       // Every admin lands on the dashboard; the super admin reaches
       // Admin Management and the Activity Log from the sidebar.
       router.push("/");
-    } catch (err: any) {
-      setError(err.message || "An error occurred during login");
+    } catch (err) {
+      setError((err instanceof Error && err.message) || "An error occurred during login");
     } finally {
       setLoading(false);
     }

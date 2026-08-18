@@ -22,7 +22,22 @@ export function removeAuthToken(): void {
   localStorage.removeItem("admin_user");
 }
 
-export function getAdminUser(): any | null {
+/**
+ * Shape of the admin record cached in localStorage by the login flow.
+ * Fields are optional because the stored JSON is written by the API and is
+ * only ever read defensively; the index signature keeps any additional field
+ * the API sends readable without widening the known fields to `any`.
+ */
+export interface AdminUser {
+  id?: number;
+  email?: string;
+  first_name?: string;
+  last_name?: string;
+  is_superuser?: boolean;
+  [key: string]: unknown;
+}
+
+export function getAdminUser(): AdminUser | null {
   if (typeof window === "undefined") return null;
   const userStr = localStorage.getItem("admin_user");
   if (!userStr) return null;

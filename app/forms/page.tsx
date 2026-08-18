@@ -37,8 +37,8 @@ export default function FormsPage() {
       }
       const data = await response.json();
       setSubmissions(data);
-    } catch (err: any) {
-      setError(err.message || "Failed to load form submissions");
+    } catch (err) {
+      setError(err instanceof Error && err.message ? err.message : "Failed to load form submissions");
     } finally {
       setLoading(false);
     }
@@ -59,8 +59,8 @@ export default function FormsPage() {
       }
 
       setSubmissions(submissions.filter((s) => s.id !== id));
-    } catch (err: any) {
-      alert(err.message || "Failed to delete submission");
+    } catch (err) {
+      alert(err instanceof Error && err.message ? err.message : "Failed to delete submission");
     }
   };
 

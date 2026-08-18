@@ -58,8 +58,8 @@ export default function DocumentsPage() {
         });
         if (!res.ok) throw new Error("Could not load the scraped content.");
         setContentDoc(await res.json());
-      } catch (e: any) {
-        alert(e.message || "Could not load the scraped content.");
+      } catch (e) {
+        alert((e instanceof Error ? e.message : "") || "Could not load the scraped content.");
       } finally {
         setViewingId(null);
       }
@@ -81,8 +81,8 @@ export default function DocumentsPage() {
       if (!win) alert("Your browser blocked the popup. Allow popups for this site to view documents.");
       // Give the new tab time to load before releasing the object URL
       setTimeout(() => URL.revokeObjectURL(url), 60000);
-    } catch (e: any) {
-      alert(e.message || "Could not open this document.");
+    } catch (e) {
+      alert((e instanceof Error ? e.message : "") || "Could not open this document.");
     } finally {
       setViewingId(null);
     }

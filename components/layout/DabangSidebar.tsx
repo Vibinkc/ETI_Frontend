@@ -23,6 +23,10 @@ export default function ETISidebar() {
 
   useEffect(() => {
     const user = getAdminUser();
+    // getAdminUser() reads localStorage, which does not exist during SSR. Reading it
+    // in an effect keeps the first client render identical to the server HTML, so the
+    // Administration group appears only after hydration, for super admins.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsSuperAdmin(user?.is_superuser || false);
   }, []);
 

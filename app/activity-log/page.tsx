@@ -18,6 +18,7 @@ import {
   Activity,
 
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 interface Entry {
   id: number;
@@ -33,7 +34,7 @@ interface Entry {
 const PAGE_SIZE = 25;
 
 /** Icon + tone per action, so the log can be scanned rather than read. */
-const ACTION_META: Record<string, { icon: any; tone: string; label: string }> = {
+const ACTION_META: Record<string, { icon: LucideIcon; tone: string; label: string }> = {
   "auth.login": { icon: LogIn, tone: "text-[var(--eti-good)]", label: "Signed in" },
   "auth.login_failed": { icon: ShieldAlert, tone: "text-[var(--eti-critical)]", label: "Failed sign-in" },
   "document.upload": { icon: FileUp, tone: "text-[var(--color-primary)]", label: "Document uploaded" },

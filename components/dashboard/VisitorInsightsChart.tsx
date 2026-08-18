@@ -24,6 +24,18 @@ interface VisitorData {
   submissions: number;
 }
 
+/** What a recharts Tooltip formatter receives (mirrors recharts' own ValueType). */
+type TooltipValue = number | string | ReadonlyArray<number | string>;
+
+/** A row of the table in the detail dialog. */
+interface VisitorRow {
+  day?: string;
+  month?: string;
+  date?: string;
+  conversations?: number;
+  sessions?: number;
+}
+
 export default function VisitorInsightsChart({ range }: { range?: DashboardRange } = {}) {
   const [data, setData] = useState<VisitorData[]>([]);
   const [loading, setLoading] = useState(true);
@@ -104,7 +116,7 @@ export default function VisitorInsightsChart({ range }: { range?: DashboardRange
                 border: "1px solid #e5e7eb",
                 borderRadius: "8px"
               }}
-              formatter={(value: any) => {
+              formatter={(value: TooltipValue) => {
                 if (typeof value === 'number') {
                   if (value === 0) return "0";
                   if (value < 1) return value.toFixed(2);
@@ -175,7 +187,7 @@ export default function VisitorInsightsChart({ range }: { range?: DashboardRange
             </tr>
           </thead>
           <tbody>
-            {chartData.map((row: any, i: number) => (
+            {chartData.map((row: VisitorRow, i: number) => (
               <tr key={`d-${i}`} className="border-b border-[var(--eti-border)]">
                 <td className="py-2 pr-3 text-[12px] text-[var(--eti-ink)]">{row.day ?? row.month ?? row.date}</td>
                 <td className="py-2 px-3 text-right text-[12px] tabular-nums text-[var(--eti-ink)]">{row.conversations ?? 0}</td>

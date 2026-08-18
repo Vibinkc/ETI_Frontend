@@ -46,8 +46,8 @@ export default function InstructionsPage() {
       setContent(data.content);
       setSavedContent(data.content);
       setMeta(data);
-    } catch (e: any) {
-      setError(e.message || "Could not load instructions.");
+    } catch (e) {
+      setError(e instanceof Error && e.message ? e.message : "Could not load instructions.");
     } finally {
       setLoading(false);
     }
@@ -77,8 +77,8 @@ export default function InstructionsPage() {
       setMeta(data);
       setSuccess("Instructions saved. The chatbot is now using them.");
       setTimeout(() => setSuccess(null), 4000);
-    } catch (e: any) {
-      setError(e.message || "Could not save instructions.");
+    } catch (e) {
+      setError(e instanceof Error && e.message ? e.message : "Could not save instructions.");
     } finally {
       setSaving(false);
     }
@@ -95,8 +95,8 @@ export default function InstructionsPage() {
       setContent(data.content);
       setSuccess("Default instructions loaded. Click Save to apply them.");
       setTimeout(() => setSuccess(null), 5000);
-    } catch (e: any) {
-      setError(e.message || "Could not load the default instructions.");
+    } catch (e) {
+      setError(e instanceof Error && e.message ? e.message : "Could not load the default instructions.");
     }
   };
 

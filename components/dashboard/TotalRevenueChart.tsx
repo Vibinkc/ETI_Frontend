@@ -24,6 +24,14 @@ interface ActivityData {
   documents: number;
 }
 
+/** A row of the table in the detail dialog. */
+interface ActivityRow {
+  day?: string;
+  date?: string;
+  questions?: number;
+  documents?: number;
+}
+
 export default function TotalRevenueChart({ range }: { range?: DashboardRange } = {}) {
   const [data, setData] = useState<ActivityData[]>([]);
   const [loading, setLoading] = useState(true);
@@ -148,7 +156,7 @@ export default function TotalRevenueChart({ range }: { range?: DashboardRange } 
             </tr>
           </thead>
           <tbody>
-            {chartData.map((row: any, i: number) => (
+            {chartData.map((row: ActivityRow, i: number) => (
               <tr key={`a-${i}`} className="border-b border-[var(--eti-border)]">
                 <td className="py-2 pr-3 text-[12px] text-[var(--eti-ink)]">{row.day ?? row.date}</td>
                 <td className="py-2 px-3 text-right text-[12px] tabular-nums text-[var(--eti-ink)]">{row.questions ?? 0}</td>

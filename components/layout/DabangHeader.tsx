@@ -3,7 +3,7 @@
 import { LogOut, Menu } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getAdminUser, removeAuthToken } from "@/lib/auth";
+import { getAdminUser, removeAuthToken, type AdminUser } from "@/lib/auth";
 import { useMobileNav } from "./MobileNav";
 
 const PAGES: Record<string, { title: string; sub: string }> = {
@@ -22,9 +22,12 @@ export default function ETIHeader() {
   const pathname = usePathname();
   const router = useRouter();
   const { setOpen } = useMobileNav();
-  const [adminUser, setAdminUser] = useState<any>(null);
+  const [adminUser, setAdminUser] = useState<AdminUser | null>(null);
 
   useEffect(() => {
+    // getAdminUser() reads localStorage, which does not exist during SSR. Loading
+    // it in an effect keeps the first client render identical to the server HTML.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setAdminUser(getAdminUser());
   }, []);
 

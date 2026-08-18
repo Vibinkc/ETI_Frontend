@@ -23,10 +23,13 @@ export function MobileNavProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
   // Navigating should always dismiss the drawer, otherwise it stays over the
-  // page the user just asked for.
-  useEffect(() => {
+  // page the user just asked for. This is derived from the route rather than an
+  // effect, so the drawer is already closed in the render that follows navigation.
+  const [lastPathname, setLastPathname] = useState(pathname);
+  if (pathname !== lastPathname) {
+    setLastPathname(pathname);
     setOpen(false);
-  }, [pathname]);
+  }
 
   // Escape closes it, and the page behind must not scroll while it is open.
   useEffect(() => {

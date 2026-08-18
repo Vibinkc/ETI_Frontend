@@ -43,6 +43,7 @@ export default function WidgetPage() {
   const [isCTAVisible, setIsCTAVisible] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- client-only flag: must stay in an effect so SSR renders the non-random markup and hydration matches
     setIsClient(true);
 
     // Generate lightning bolt data
@@ -544,7 +545,7 @@ export default function WidgetPage() {
           <div className={`bg-gradient-to-r from-[#002c5c]/5 via-[#81c341]/5 to-[#002c5c]/5 rounded-2xl p-8 border border-gray-200 text-center relative overflow-hidden hover:border-[#81c341]/30 transition-all duration-300 ${isAboutUsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'} transition-all duration-1000 delay-1600`}>
             <div className="relative z-10">
               <p className={`text-xl text-gray-700 mb-6 transition-all duration-1000 delay-200 ${isAboutUsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                At <span className="font-semibold text-[#002c5c]">Electrical Training Institute</span>, we believe in the power of education to transform lives. Whether you're just starting out or looking to enhance your current skills, we're here to support your journey every step of the way.
+                At <span className="font-semibold text-[#002c5c]">Electrical Training Institute</span>, we believe in the power of education to transform lives. Whether you&apos;re just starting out or looking to enhance your current skills, we&apos;re here to support your journey every step of the way.
               </p>
               <button className={`px-8 py-4 bg-gradient-to-r from-[#002c5c] to-[#81c341] text-white rounded-lg font-semibold text-lg hover:shadow-xl transition-all transform hover:scale-105 relative overflow-hidden group ${isAboutUsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} transition-all duration-1000 delay-400`}>
                 <span className="relative z-10 flex items-center gap-2">
@@ -576,7 +577,7 @@ export default function WidgetPage() {
               Specialized Training Programs
             </h2>
             <p className={`text-xl text-gray-600 max-w-3xl mx-auto transition-all duration-1000 delay-400 ${isProgramsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'}`}>
-              We offer a range of specialized programs tailored to meet the needs of today's rapidly evolving job market.
+              We offer a range of specialized programs tailored to meet the needs of today&apos;s rapidly evolving job market.
             </p>
           </div>
 
@@ -1011,7 +1012,7 @@ export default function WidgetPage() {
                   <h3 className="text-2xl font-bold text-gray-900">Why Veterans Excel</h3>
                 </div>
                 <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                  You've already honed your technical skills. Why start your career from scratch when you leave the military? Use those skills to advance your career right now through the Electrical Training Institute of San Diego and Imperial Counties.
+                  You&apos;ve already honed your technical skills. Why start your career from scratch when you leave the military? Use those skills to advance your career right now through the Electrical Training Institute of San Diego and Imperial Counties.
                 </p>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3 p-4 bg-gradient-to-r from-[#002c5c]/5 to-transparent rounded-lg">
