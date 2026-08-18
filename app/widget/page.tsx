@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { API_ENDPOINTS } from "@/lib/api";
 import {
   MessageSquare,
@@ -46,6 +46,31 @@ function secureRandom(): number {
   const buffer = new Uint32Array(1);
   crypto.getRandomValues(buffer);
   return buffer[0] / 2 ** 32;
+}
+
+/**
+ * A footer entry that has no destination yet.
+ *
+ * These were `<a href="#">`, which is not a valid link: it is announced to
+ * screen readers as navigable, appears in the links list, and clicking it
+ * jumps the page to the top. jsx-a11y/anchor-is-valid says to use a button and
+ * style it as a link, which is what this does.
+ *
+ * The three classes restore the only UA defaults where a button differs from
+ * an anchor - Tailwind's preflight already resets margin, padding, border,
+ * background, font and colour, so the rendered result is unchanged:
+ *   inline         button defaults to inline-block, so a two-word label such as
+ *                  "Document Upload" would stop wrapping in the narrow
+ *                  two-column mobile footer
+ *   text-left      button defaults to text-align: center
+ *   cursor-pointer Tailwind v4 no longer gives buttons the pointer cursor
+ */
+function FooterLink({ children }: { children: ReactNode }) {
+  return (
+    <button type="button" className="inline text-left cursor-pointer hover:underline">
+      {children}
+    </button>
+  );
 }
 
 export default function WidgetPage() {
@@ -1145,57 +1170,57 @@ export default function WidgetPage() {
             <div>
               <h3 className="font-semibold mb-4">ETI Assistant</h3>
               <ul className="space-y-2 text-sm opacity-90">
-                <li><a href="#" className="hover:underline">About</a></li>
-                <li><a href="#" className="hover:underline">Careers</a></li>
-                <li><a href="#" className="hover:underline">Press</a></li>
+                <li><FooterLink>About</FooterLink></li>
+                <li><FooterLink>Careers</FooterLink></li>
+                <li><FooterLink>Press</FooterLink></li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Features</h3>
               <ul className="space-y-2 text-sm opacity-90">
-                <li><a href="#" className="hover:underline">AI Chat</a></li>
-                <li><a href="#" className="hover:underline">Document Upload</a></li>
-                <li><a href="#" className="hover:underline">Analytics</a></li>
+                <li><FooterLink>AI Chat</FooterLink></li>
+                <li><FooterLink>Document Upload</FooterLink></li>
+                <li><FooterLink>Analytics</FooterLink></li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Solutions</h3>
               <ul className="space-y-2 text-sm opacity-90">
-                <li><a href="#" className="hover:underline">For Teams</a></li>
-                <li><a href="#" className="hover:underline">For Enterprise</a></li>
-                <li><a href="#" className="hover:underline">For Startups</a></li>
+                <li><FooterLink>For Teams</FooterLink></li>
+                <li><FooterLink>For Enterprise</FooterLink></li>
+                <li><FooterLink>For Startups</FooterLink></li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Company</h3>
               <ul className="space-y-2 text-sm opacity-90">
-                <li><a href="#" className="hover:underline">Blog</a></li>
-                <li><a href="#" className="hover:underline">Help Center</a></li>
-                <li><a href="#" className="hover:underline">Contact</a></li>
+                <li><FooterLink>Blog</FooterLink></li>
+                <li><FooterLink>Help Center</FooterLink></li>
+                <li><FooterLink>Contact</FooterLink></li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Resources</h3>
               <ul className="space-y-2 text-sm opacity-90">
-                <li><a href="#" className="hover:underline">Documentation</a></li>
-                <li><a href="#" className="hover:underline">API</a></li>
-                <li><a href="#" className="hover:underline">Templates</a></li>
+                <li><FooterLink>Documentation</FooterLink></li>
+                <li><FooterLink>API</FooterLink></li>
+                <li><FooterLink>Templates</FooterLink></li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Integrations</h3>
               <ul className="space-y-2 text-sm opacity-90">
-                <li><a href="#" className="hover:underline">Slack</a></li>
-                <li><a href="#" className="hover:underline">Microsoft</a></li>
-                <li><a href="#" className="hover:underline">Google</a></li>
+                <li><FooterLink>Slack</FooterLink></li>
+                <li><FooterLink>Microsoft</FooterLink></li>
+                <li><FooterLink>Google</FooterLink></li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Mobile Apps</h3>
               <ul className="space-y-2 text-sm opacity-90">
-                <li><a href="#" className="hover:underline">iOS App</a></li>
-                <li><a href="#" className="hover:underline">Android App</a></li>
-                <li><a href="#" className="hover:underline">Desktop App</a></li>
+                <li><FooterLink>iOS App</FooterLink></li>
+                <li><FooterLink>Android App</FooterLink></li>
+                <li><FooterLink>Desktop App</FooterLink></li>
               </ul>
             </div>
           </div>
@@ -1205,9 +1230,9 @@ export default function WidgetPage() {
               <span className="font-semibold">ETI Assistant</span>
             </div>
             <div className="flex gap-6 text-sm opacity-90">
-              <a href="#" className="hover:underline">Privacy</a>
-              <a href="#" className="hover:underline">Terms</a>
-              <a href="#" className="hover:underline">Security</a>
+              <FooterLink>Privacy</FooterLink>
+              <FooterLink>Terms</FooterLink>
+              <FooterLink>Security</FooterLink>
             </div>
           </div>
         </div>

@@ -28,6 +28,9 @@ const eslintConfig = defineConfig([
       "jsx-a11y/no-noninteractive-element-interactions": "error",
       "jsx-a11y/click-events-have-key-events": "error",
       "jsx-a11y/no-static-element-interactions": "error",
+      // Catches <a href="#"> placeholders, which are announced as navigable
+      // links and jump the page to the top when activated.
+      "jsx-a11y/anchor-is-valid": "error",
       // Catches whitespace between JSX elements whose rendered result is
       // ambiguous - the source looks like a space where none renders.
       "react/jsx-child-element-spacing": "error",
